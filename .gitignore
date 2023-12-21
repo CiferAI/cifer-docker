@@ -1,0 +1,16 @@
+vue/node_modules
+vue/dist
+release/
+.idea/
+.vscode/
+.DS_Store
+*.dot
+*.log
+gaia_config/app.toml
+gaia_config/client.toml
+gaia_config/config copy.toml
+gaia_config/config.toml
+gaia_config/genesis.json
+gaia_config/node_key.json
+gaia_config/priv_validator_key.json
+gaia_config/temp.json

@@ -1,0 +1,25 @@
+version: 1
+accounts:
+- name: alice
+  coins:
+  - 1000000000cif
+  - 200000000stake
+- name: bob
+  coins:
+  - 1000000000cif
+  - 100000000stake
+faucet:
+  name: bob
+  coins:
+  - 5cif
+  - 100000stake
+client:
+  typescript:
+    path: ts-client
+  composables:
+    path: vue/src/composables
+  openapi:
+    path: docs/static/openapi.yml
+validators:
+- name: alice
+  bonded: 100000000stake

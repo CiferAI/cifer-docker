@@ -1,0 +1,18 @@
+Unit]
+Description=Cosmovisor service
+After=network-online.target
+
+[Service]
+User=root
+ExecStart=/root/.gvm/pkgsets/go1.20/global/bin/cosmovisor run start --x-crisis-skip-assert-invariants --home /root/.gaia
+Restart=no
+LimitNOFILE=4096
+Environment='DAEMON_NAME=gaiad'
+Environment='DAEMON_HOME=/root/.gaia'
+Environment='DAEMON_ALLOW_DOWNLOAD_BINARIES=true'
+Environment='DAEMON_RESTART_AFTER_UPGRADE=true'
+Environment='DAEMON_LOG_BUFFER_SIZE=512'
+Environment='UNSAFE_SKIP_BACKUP=true'
+
+[Install]
+WantedBy=multi-user.target
