@@ -21,7 +21,7 @@ Suspendisse dapibus arcu ultrices libero accumsan volutpat. Vivamus molestie, au
 </div>
 
 ```mermaid
-pie
+    pie
     title 200,000 tokens minted at genesis
     "Airdrop": 40
     "Community Pool": 10
