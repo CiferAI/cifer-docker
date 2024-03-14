@@ -2,11 +2,11 @@ version: 1
 accounts:
 - name: alice
   coins:
-  - 1000000000cif
+  - 1024000000cif
   - 200000000stake
 - name: bob
   coins:
-  - 1000000000cif
+  - 1024000000cif
   - 100000000stake
 faucet:
   name: bob
@@ -23,3 +23,11 @@ client:
 validators:
 - name: alice
   bonded: 100000000stake
+  home: "~/.cifer"
+  app:
+      pruning: "nothing"
+  config:
+      moniker: "cifer.ai"
+  client:
+      output: "json"
+  minimum-gas-prices: "0.0005cif"
