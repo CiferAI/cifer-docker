@@ -1,18 +1,14 @@
-version: 1
-accounts:
-- name: alice
-  coins:
-  - 1000000000cif
-  - 200000000stake
-- name: bob
-  coins:
-  - 1000000000cif
-  - 100000000stake
-faucet:
-  name: bob
-  coins:
-  - 5cif
-  - 100000stake
+version: 2
+build:
+  binary: ciferd
+  ldflags:
+  - -X main.Env=prod
+  - -X main.Version=0.25.1
+  proto:
+    path: proto
+    third_party_paths:
+    - third_party/proto
+    - proto_vendor
 client:
   typescript:
     path: ts-client
@@ -20,6 +16,3 @@ client:
     path: vue/src/composables
   openapi:
     path: docs/static/openapi.yml
-validators:
-- name: alice
-  bonded: 100000000stake
