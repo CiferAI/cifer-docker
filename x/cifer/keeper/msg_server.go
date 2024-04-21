@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	"cifer/x/cifer/types"
 )
 
 type msgServer struct {

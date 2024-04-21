@@ -11,9 +11,6 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  server: {
-    origin: 'http://119.59.105.97:5173/'
-  },
   optimizeDeps: {
     esbuildOptions: {
       define: {

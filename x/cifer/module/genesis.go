@@ -3,14 +3,16 @@ package cifer
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/cifer-ai/cifer/x/cifer/keeper"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	"cifer/x/cifer/keeper"
+	"cifer/x/cifer/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// this line is used by starport scaffolding # genesis/module/init
-	k.SetParams(ctx, genState.Params)
+	if err := k.SetParams(ctx, genState.Params); err != nil {
+		panic(err)
+	}
 }
 
 // ExportGenesis returns the module's exported genesis.

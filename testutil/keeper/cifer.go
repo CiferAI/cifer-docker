@@ -17,8 +17,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	"github.com/stretchr/testify/require"
 
-	"github.com/cifer-ai/cifer/x/cifer/keeper"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	"cifer/x/cifer/keeper"
+	"cifer/x/cifer/types"
 )
 
 func CiferKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
@@ -43,7 +43,9 @@ func CiferKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 	ctx := sdk.NewContext(stateStore, cmtproto.Header{}, false, log.NewNopLogger())
 
 	// Initialize params
-	k.SetParams(ctx, types.DefaultParams())
+	if err := k.SetParams(ctx, types.DefaultParams()); err != nil {
+		panic(err)
+	}
 
 	return k, ctx
 }

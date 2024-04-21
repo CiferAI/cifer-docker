@@ -17,13 +17,9 @@ export interface ConfigResponse {
   minimum_gas_price?: string;
   pruning_keep_recent?: string;
   pruning_interval?: string;
-}
 
-export interface Status {
-  /** @format int32 */
-  code?: number;
-  message?: string;
-  details?: { "@type"?: string }[];
+  /** @format uint64 */
+  halt_height?: string;
 }
 
 export interface StatusResponse {
@@ -41,6 +37,13 @@ export interface StatusResponse {
 
   /** @format byte */
   validator_hash?: string;
+}
+
+export interface RpcStatus {
+  /** @format int32 */
+  code?: number;
+  message?: string;
+  details?: { "@type"?: string }[];
 }
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
@@ -176,7 +179,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    */
   serviceConfig = (params: RequestParams = {}) =>
     this.request<
-      { minimum_gas_price?: string; pruning_keep_recent?: string; pruning_interval?: string },
+      { minimum_gas_price?: string; pruning_keep_recent?: string; pruning_interval?: string; halt_height?: string },
       { code?: number; message?: string; details?: { "@type"?: string }[] }
     >({
       path: `/cosmos/base/node/v1beta1/config`,

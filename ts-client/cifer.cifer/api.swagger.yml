@@ -4,7 +4,7 @@ info:
   name: ''
   description: ''
 paths:
-  /cifer-ai/cifer/cifer/params:
+  /cifer/cifer/params:
     get:
       operationId: Query_Params
       responses:
@@ -58,12 +58,14 @@ definitions:
             '@type':
               type: string
           additionalProperties: {}
-  Params:
-    type: object
   QueryParamsResponse:
     type: object
     properties:
       params:
         type: object
+  cifer.Params:
+    type: object
   MsgUpdateParamsResponse:
+    type: object
+  Params:
     type: object

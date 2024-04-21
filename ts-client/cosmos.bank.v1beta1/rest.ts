@@ -70,11 +70,6 @@ export interface PageResponse {
   total?: string;
 }
 
-export interface Params {
-  send_enabled?: { denom?: string; enabled?: boolean }[];
-  default_send_enabled?: boolean;
-}
-
 export interface QueryAllBalancesResponse {
   balances?: { denom?: string; amount?: string }[];
   pagination?: { next_key?: string; total?: string };
@@ -108,6 +103,11 @@ export interface QueryDenomMetadataResponse {
     uri?: string;
     uri_hash?: string;
   };
+}
+
+export interface QueryDenomOwnersByQueryResponse {
+  denom_owners?: { address?: string; balance?: { denom?: string; amount?: string } }[];
+  pagination?: { next_key?: string; total?: string };
 }
 
 export interface QueryDenomOwnersResponse {
@@ -156,7 +156,12 @@ export interface QueryTotalSupplyResponse {
   pagination?: { next_key?: string; total?: string };
 }
 
-export interface SendEnabled {
+export interface V1Beta1Params {
+  send_enabled?: { denom?: string; enabled?: boolean }[];
+  default_send_enabled?: boolean;
+}
+
+export interface V1Beta1SendEnabled {
   denom?: string;
   enabled?: boolean;
 }
@@ -177,6 +182,16 @@ export type MsgUpdateParamsResponse = object;
 export interface Output {
   address?: string;
   coins?: { denom?: string; amount?: string }[];
+}
+
+export interface Params {
+  send_enabled?: { denom?: string; enabled?: boolean }[];
+  default_send_enabled?: boolean;
+}
+
+export interface SendEnabled {
+  denom?: string;
+  enabled?: boolean;
 }
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
@@ -376,6 +391,37 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       { code?: number; message?: string; details?: { "@type"?: string }[] }
     >({
       path: `/cosmos/bank/v1beta1/denom_owners/${denom}`,
+      method: "GET",
+      query: query,
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryDenomOwnersByQuery
+   * @request GET:/cosmos/bank/v1beta1/denom_owners_by_query
+   */
+  queryDenomOwnersByQuery = (
+    query?: {
+      denom?: string;
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<
+      {
+        denom_owners?: { address?: string; balance?: { denom?: string; amount?: string } }[];
+        pagination?: { next_key?: string; total?: string };
+      },
+      { code?: number; message?: string; details?: { "@type"?: string }[] }
+    >({
+      path: `/cosmos/bank/v1beta1/denom_owners_by_query`,
       method: "GET",
       query: query,
       ...params,

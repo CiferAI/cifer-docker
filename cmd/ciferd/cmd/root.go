@@ -24,7 +24,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/cifer-ai/cifer/app"
+	"cifer/app"
 )
 
 // NewRootCmd creates a new root command for ciferd. It is called once in the main function.
@@ -55,10 +55,6 @@ func NewRootCmd() *cobra.Command {
 	); err != nil {
 		panic(err)
 	}
-	// Since the IBC modules don't support dependency injection, we need to
-	// manually add the modules to the basic manager on the client side.
-	// This needs to be removed after IBC supports App Wiring.
-	app.AddIBCModuleManager(moduleBasicManager)
 
 	rootCmd := &cobra.Command{
 		Use:           app.Name + "d",
@@ -82,7 +78,7 @@ func NewRootCmd() *cobra.Command {
 
 			// This needs to go after ReadFromClientConfig, as that function
 			// sets the RPC client needed for SIGN_MODE_TEXTUAL.
-			txConfigOpts.EnabledSignModes = append(tx.DefaultSignModes, signing.SignMode_SIGN_MODE_TEXTUAL)
+			txConfigOpts.EnabledSignModes = append(txConfigOpts.EnabledSignModes, signing.SignMode_SIGN_MODE_TEXTUAL)
 			txConfigOpts.TextualCoinMetadataQueryFn = txmodule.NewGRPCCoinMetadataQueryFn(clientCtx)
 			txConfigWithTextual, err := tx.NewTxConfigWithOptions(
 				codec.NewProtoCodec(clientCtx.InterfaceRegistry),
@@ -108,7 +104,16 @@ func NewRootCmd() *cobra.Command {
 		},
 	}
 
-	initRootCmd(rootCmd, clientCtx.TxConfig, clientCtx.InterfaceRegistry, clientCtx.Codec, moduleBasicManager)
+	// Since the IBC modules don't support dependency injection, we need to
+	// manually register the modules on the client side.
+	// This needs to be removed after IBC supports App Wiring.
+	ibcModules := app.RegisterIBC(clientCtx.InterfaceRegistry)
+	for name, mod := range ibcModules {
+		moduleBasicManager[name] = module.CoreAppModuleBasicAdaptor(name, mod)
+		autoCliOpts.Modules[name] = mod
+	}
+
+	initRootCmd(rootCmd, clientCtx.TxConfig, moduleBasicManager)
 
 	overwriteFlagDefaults(rootCmd, map[string]string{
 		flags.FlagChainID:        strings.ReplaceAll(app.Name, "-", ""),
@@ -126,7 +131,7 @@ func overwriteFlagDefaults(c *cobra.Command, defaults map[string]string) {
 	set := func(s *pflag.FlagSet, key, val string) {
 		if f := s.Lookup(key); f != nil {
 			f.DefValue = val
-			f.Value.Set(val)
+			_ = f.Value.Set(val)
 		}
 	}
 	for key, val := range defaults {

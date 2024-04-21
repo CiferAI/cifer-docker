@@ -8,9 +8,9 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/cifer-ai/cifer/testutil/sample"
-	cifersimulation "github.com/cifer-ai/cifer/x/cifer/simulation"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	"cifer/testutil/sample"
+	cifersimulation "cifer/x/cifer/simulation"
+	"cifer/x/cifer/types"
 )
 
 // avoid unused import issue
@@ -41,11 +41,6 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 
 // RegisterStoreDecoder registers a decoder.
 func (am AppModule) RegisterStoreDecoder(_ simtypes.StoreDecoderRegistry) {}
-
-// ProposalContents doesn't return any content functions for governance proposals.
-func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedProposalContent {
-	return nil
-}
 
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {

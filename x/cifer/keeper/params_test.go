@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "github.com/cifer-ai/cifer/testutil/keeper"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	keepertest "cifer/testutil/keeper"
+	"cifer/x/cifer/types"
 )
 
 func TestGetParams(t *testing.T) {

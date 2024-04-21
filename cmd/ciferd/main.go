@@ -6,8 +6,8 @@ import (
 
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	"github.com/cifer-ai/cifer/app"
-	"github.com/cifer-ai/cifer/cmd/ciferd/cmd"
+	"cifer/app"
+	"cifer/cmd/ciferd/cmd"
 )
 
 func main() {

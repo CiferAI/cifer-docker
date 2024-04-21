@@ -213,6 +213,86 @@ paths:
           type: boolean
       tags:
         - Query
+  /cosmos/bank/v1beta1/denom_owners_by_query:
+    get:
+      operationId: Query_DenomOwnersByQuery
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              denom_owners:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                    balance:
+                      type: object
+                      properties:
+                        denom:
+                          type: string
+                        amount:
+                          type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                  total:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: denom
+          in: query
+          required: false
+          type: string
+        - name: pagination.key
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
   /cosmos/bank/v1beta1/denoms_metadata:
     get:
       operationId: Query_DenomsMetadata
@@ -904,20 +984,6 @@ definitions:
       total:
         type: string
         format: uint64
-  Params:
-    type: object
-    properties:
-      send_enabled:
-        type: array
-        items:
-          type: object
-          properties:
-            denom:
-              type: string
-            enabled:
-              type: boolean
-      default_send_enabled:
-        type: boolean
   QueryAllBalancesResponse:
     type: object
     properties:
@@ -1017,6 +1083,32 @@ definitions:
             type: string
           uri_hash:
             type: string
+  QueryDenomOwnersByQueryResponse:
+    type: object
+    properties:
+      denom_owners:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
+            balance:
+              type: object
+              properties:
+                denom:
+                  type: string
+                amount:
+                  type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+          total:
+            type: string
+            format: uint64
   QueryDenomOwnersResponse:
     type: object
     properties:
@@ -1188,7 +1280,21 @@ definitions:
           total:
             type: string
             format: uint64
-  SendEnabled:
+  v1beta1.Params:
+    type: object
+    properties:
+      send_enabled:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+            enabled:
+              type: boolean
+      default_send_enabled:
+        type: boolean
+  v1beta1.SendEnabled:
     type: object
     properties:
       denom:
@@ -1231,3 +1337,24 @@ definitions:
               type: string
             amount:
               type: string
+  Params:
+    type: object
+    properties:
+      send_enabled:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+            enabled:
+              type: boolean
+      default_send_enabled:
+        type: boolean
+  SendEnabled:
+    type: object
+    properties:
+      denom:
+        type: string
+      enabled:
+        type: boolean

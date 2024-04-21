@@ -3,7 +3,8 @@ package types_test
 import (
 	"testing"
 
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	"cifer/x/cifer/types"
+
 	"github.com/stretchr/testify/require"
 )
 

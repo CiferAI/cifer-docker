@@ -20,9 +20,9 @@ import (
 
 	// this line is used by starport scaffolding # 1
 
-	modulev1 "github.com/cifer-ai/cifer/api/cifer/cifer/module"
-	"github.com/cifer-ai/cifer/x/cifer/keeper"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	modulev1 "cifer/api/cifer/cifer/module"
+	"cifer/x/cifer/keeper"
+	"cifer/x/cifer/types"
 )
 
 var (
@@ -86,13 +86,6 @@ func (AppModuleBasic) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *r
 		panic(err)
 	}
 }
-
-// GetTxCmd returns the root Tx command for the module.
-// These commands enrich the AutoCLI tx commands.
-// When creating non AutoCLI commands, add the following:
-// func (a AppModuleBasic) GetTxCmd() *cobra.Command {
-//    return cli.GetTxCmd()
-// }
 
 // ----------------------------------------------------------------------------
 // AppModule

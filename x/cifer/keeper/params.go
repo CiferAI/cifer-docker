@@ -5,7 +5,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/runtime"
 
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	"cifer/x/cifer/types"
 )
 
 // GetParams get all parameters as types.Params

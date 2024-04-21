@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	keepertest "github.com/cifer-ai/cifer/testutil/keeper"
-	"github.com/cifer-ai/cifer/x/cifer/keeper"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	keepertest "cifer/testutil/keeper"
+	"cifer/x/cifer/keeper"
+	"cifer/x/cifer/types"
 )
 
 func setupMsgServer(t testing.TB) (keeper.Keeper, types.MsgServer, context.Context) {

@@ -51,7 +51,7 @@ RUN ln -s /usr/lib/protoc/bin/protoc ${LOCAL}/bin/protoc
 
 RUN apt-get clean
 
-EXPOSE 1317 4500 5000 26657 5173
+EXPOSE 1317 4500 5000 26657 5173 9090 9091 26656 6060
 
 WORKDIR /cifer
 
@@ -64,11 +64,16 @@ RUN rm /cifer/go.mod
 # To test only 1 command
 # $ docker run --rm -it -v $(pwd):/cifer -w /cifer cifer_i go test github.com/b9lab/cifer/x/cifer/keeper
 # To build container
-# $ docker create --name cifer -i -v $(pwd):/cifer -w /cifer -p 1317:1317 -p 3000:3000 -p 4500:4500 -p 5000:5000 -p 26657:26657 -p 5173:5173 cifer_i
+# $ docker create --name cifer -i -v $(pwd):/cifer -w /cifer -p 6060:6060 -p 26656:26656 -p 9091:9091  -p 9090:9090 -p 26659:26659 -p 443:443 -p 1317:1317 -p 3000:3000 -p 4500:4500 -p 5000:5000 -p 26657:26657 -p 5173:5173 cifer_i
 # $ docker start cifer
 # To run server on it
 # $ docker exec -it cifer ignite chain serve --reset-once
 # In other shell, to query it
 # $ docker exec -it cifer npm run dev -- --host
-
+# cosmos1l950395d9s8fytxkgjsthv9h3sp9pzjscm8a66
+# cosmos1l950395d9s8fytxkgjsthv9h3sp9pzjscm8a66
+# cosmos1l950395d9s8fytxkgjsthv9h3sp9pzjscm8a66
 # npm run dev -- --host
+# http://0.0.0.0:26659
+#  wscat ws://127.0.0.1:26657/websocket
+

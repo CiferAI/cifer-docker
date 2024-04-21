@@ -3,7 +3,7 @@ package cifer
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	modulev1 "github.com/cifer-ai/cifer/api/cifer/cifer"
+	modulev1 "cifer/api/cifer/cifer"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

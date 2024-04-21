@@ -133,8 +133,6 @@ export class IgniteClient extends EventEmitter {
           return y;
         }) ?? [];
 
-      let coinType = 118;
-
       if (chainId) {
         const suggestOptions: ChainInfo = {
           chainId,
@@ -146,7 +144,6 @@ export class IgniteClient extends EventEmitter {
           bech32Config,
           currencies,
           feeCurrencies,
-          coinType,
           ...keplrChainInfo,
         };
         await window.keplr.experimentalSuggestChain(suggestOptions);

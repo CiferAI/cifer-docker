@@ -4,7 +4,7 @@ package cifer.cifer;
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/cifer-ai/cifer/x/cifer/types";
+option go_package = "cifer/x/cifer/types";
 
 // Params defines the parameters for the module.
 message Params {

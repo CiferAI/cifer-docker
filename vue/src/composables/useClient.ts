@@ -1,4 +1,4 @@
-import { Client } from 'cifer-ai-cifer-client-ts'
+import { Client } from 'cifer-client-ts'
 import { env } from '../env';
 
 const useClientInstance = () => {

@@ -3,10 +3,11 @@ package cifer_test
 import (
 	"testing"
 
-	keepertest "github.com/cifer-ai/cifer/testutil/keeper"
-	"github.com/cifer-ai/cifer/testutil/nullify"
-	"github.com/cifer-ai/cifer/x/cifer/module"
-	"github.com/cifer-ai/cifer/x/cifer/types"
+	keepertest "cifer/testutil/keeper"
+	"cifer/testutil/nullify"
+	cifer "cifer/x/cifer/module"
+	"cifer/x/cifer/types"
+
 	"github.com/stretchr/testify/require"
 )
 

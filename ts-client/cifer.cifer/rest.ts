@@ -20,13 +20,15 @@ export interface Status {
   details?: { "@type"?: string }[];
 }
 
-export type Params = object;
-
 export interface QueryParamsResponse {
   params?: object;
 }
 
+export type CiferParams = object;
+
 export type MsgUpdateParamsResponse = object;
+
+export type Params = object;
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
 
@@ -157,11 +159,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    *
    * @tags Query
    * @name QueryParams
-   * @request GET:/cifer-ai/cifer/cifer/params
+   * @request GET:/cifer/cifer/params
    */
   queryParams = (params: RequestParams = {}) =>
     this.request<{ params?: object }, { code?: number; message?: string; details?: { "@type"?: string }[] }>({
-      path: `/cifer-ai/cifer/cifer/params`,
+      path: `/cifer/cifer/params`,
       method: "GET",
       ...params,
     });

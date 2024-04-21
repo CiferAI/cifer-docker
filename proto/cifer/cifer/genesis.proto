@@ -5,7 +5,7 @@ import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "cifer/cifer/params.proto";
 
-option go_package = "github.com/cifer-ai/cifer/x/cifer/types";
+option go_package = "cifer/x/cifer/types";
 
 // GenesisState defines the cifer module's genesis state.
 message GenesisState {
